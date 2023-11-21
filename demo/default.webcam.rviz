@@ -67,19 +67,25 @@ Visualization Manager:
       Frame Timeout: 15
       Frames:
         All Enabled: true
+        camera:
+          Value: true
+        tag36h11:0:
+          Value: true
       Marker Scale: 1
       Name: TF
       Show Arrows: true
       Show Axes: true
       Show Names: false
       Tree:
-        {}
+        camera:
+          tag36h11:0:
+            {}
       Update Interval: 0
       Value: true
   Enabled: true
   Global Options:
     Background Color: 48; 48; 48
-    Fixed Frame: camera_link
+    Fixed Frame: camera
     Frame Rate: 30
   Name: root
   Tools:
