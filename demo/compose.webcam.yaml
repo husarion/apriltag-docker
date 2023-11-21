@@ -1,12 +1,9 @@
 services:
 
   april-tag:
-    build:
-      context: ../
-      dockerfile: Dockerfile
+    image: husarion/apriltag:humble-3.1.2-20231121
     volumes:
       - ./apriltag.yaml:/opt/ros/humble/share/apriltag_ros/cfg/tags_36h11.yaml
-      # - ./custom_launch.yaml:/opt/ros/humble/share/apriltag_ros/...
       - ./logitech_webcam_c930e.yaml:/root/.ros/camera_info/logitech_webcam_c930e.yaml # see https://github.com/husarion/v4l2-camera-docker
     devices:
       - /dev/video2:/dev/video0
