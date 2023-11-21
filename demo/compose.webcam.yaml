@@ -5,13 +5,11 @@ services:
       context: ../
       dockerfile: Dockerfile
     volumes:
-      - ./apriltag.yaml:/apriltag.yaml
-      - /tmp/.X11-unix:/tmp/.X11-unix:rw
+      - ./apriltag.yaml:/opt/ros/humble/share/apriltag_ros/cfg/tags_36h11.yaml
+      # - ./custom_launch.yaml:/opt/ros/humble/share/apriltag_ros/...
+      - ./logitech_webcam_c930e.yaml:/root/.ros/camera_info/logitech_webcam_c930e.yaml # see https://github.com/husarion/v4l2-camera-docker
     devices:
       - /dev/video2:/dev/video0
-    environment:
-      - DISPLAY
-      - LIBGL_ALWAYS_SOFTWARE=1
     command: ros2 launch apriltag_ros v4l2_36h11.launch.yml
 
   rviz:
@@ -22,6 +20,3 @@ services:
     environment:
       - DISPLAY
       - LIBGL_ALWAYS_SOFTWARE=1
-
-
-    # command: sleep 3600

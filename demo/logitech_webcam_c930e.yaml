@@ -1,0 +1,26 @@
+image_width: 640
+image_height: 480
+camera_name: logitech_webcam_c930e
+camera_matrix:
+  rows: 3
+  cols: 3
+  data: [490.2362 ,   0.     , 313.71983,
+           0.     , 491.77399, 233.61145,
+           0.     ,   0.     ,   1.     ]
+distortion_model: plumb_bob
+distortion_coefficients:
+  rows: 1
+  cols: 5
+  data: [0.016857, -0.124582, -0.002841, 0.006839, 0.000000]
+rectification_matrix:
+  rows: 3
+  cols: 3
+  data: [1., 0., 0.,
+         0., 1., 0.,
+         0., 0., 1.]
+projection_matrix:
+  rows: 3
+  cols: 4
+  data: [481.29434,   0.     , 317.48801,   0.     ,
+           0.     , 489.5394 , 231.89794,   0.     ,
+           0.     ,   0.     ,   1.     ,   0.     ]
