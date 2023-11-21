@@ -1,0 +1,33 @@
+services:
+
+  april-tag:
+    build:
+      context: ../
+      dockerfile: Dockerfile
+    volumes:
+      - ./apriltag.yaml:/apriltag.yaml
+    command: >
+      ros2 run apriltag_ros apriltag_node 
+        --ros-args 
+        -r image_rect:=/oak/rgb/image_raw
+        -r camera_info:=/oak/rgb/camera_info
+        --params-file /apriltag.yaml
+
+  luxonis:
+    image: husarion/depthai:humble-2.8.1
+    volumes:
+      - /dev/bus/usb:/dev/bus/usb
+      - ./luxonis.yaml:/ros2_ws/install/depthai_ros_driver/share/depthai_ros_driver/config/camera.yaml
+    device_cgroup_rules:
+      - 'c 189:* rmw'
+    command: ros2 launch depthai_ros_driver camera.launch.py parent_frame:=oak-1-base-frame
+
+  rviz:
+    image: husarion/rviz2:humble-11.2.6
+    volumes:
+      - /tmp/.X11-unix:/tmp/.X11-unix:rw
+      - ./default.luxonis.rviz:/root/.rviz2/default.rviz
+    environment:
+      - DISPLAY=${DISPLAY:?err}
+      - LIBGL_ALWAYS_SOFTWARE=1
+

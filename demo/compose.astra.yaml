@@ -1,0 +1,32 @@
+services:
+
+  april-tag:
+    build:
+      context: ../
+      dockerfile: Dockerfile
+    volumes:
+      - ./apriltag.yaml:/apriltag.yaml
+    command: >
+      ros2 run apriltag_ros apriltag_node 
+        --ros-args 
+        -r image_rect:=/camera/color/image_raw 
+        -r camera_info:=/camera/color/camera_info 
+        --params-file /apriltag.yaml
+
+  astra:
+    image: husarion/astra:humble
+    devices:
+      - /dev/bus/usb/
+    command: ros2 launch astra_camera astra_mini.launch.py
+
+  rviz:
+    image: husarion/rviz2:humble
+    volumes:
+      - /tmp/.X11-unix:/tmp/.X11-unix:rw
+      - ./default.astra.rviz:/root/.rviz2/default.rviz
+    environment:
+      - DISPLAY
+      - LIBGL_ALWAYS_SOFTWARE=1
+
+
+

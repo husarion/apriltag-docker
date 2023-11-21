@@ -1,0 +1,27 @@
+services:
+
+  april-tag:
+    build:
+      context: ../
+      dockerfile: Dockerfile
+    volumes:
+      - ./apriltag.yaml:/apriltag.yaml
+      - /tmp/.X11-unix:/tmp/.X11-unix:rw
+    devices:
+      - /dev/video2:/dev/video0
+    environment:
+      - DISPLAY
+      - LIBGL_ALWAYS_SOFTWARE=1
+    command: ros2 launch apriltag_ros v4l2_36h11.launch.yml
+
+  rviz:
+    image: husarion/rviz2:humble
+    volumes:
+      - /tmp/.X11-unix:/tmp/.X11-unix:rw
+      - ./default.webcam.rviz:/root/.rviz2/default.rviz
+    environment:
+      - DISPLAY
+      - LIBGL_ALWAYS_SOFTWARE=1
+
+
+    # command: sleep 3600
