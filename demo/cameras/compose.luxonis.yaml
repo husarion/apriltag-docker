@@ -31,3 +31,10 @@ services:
       - DISPLAY=${DISPLAY:?err}
       - LIBGL_ALWAYS_SOFTWARE=1
 
+  # plotjuggler:
+  #   image: husarion/plotjuggler:humble-1.7.3-20231122
+  #   volumes: 
+  #     - /tmp/.X11-unix:/tmp/.X11-unix:rw
+  #   environment:
+  #     - DISPLAY
+  #   command: ros2 run plotjuggler plotjuggler

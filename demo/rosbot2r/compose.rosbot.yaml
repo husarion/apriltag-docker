@@ -1,0 +1,28 @@
+services:
+
+  apriltag:
+    image: husarion/apriltag:humble-3.1.2-20231121
+    network_mode: host
+    ipc: host
+    volumes:
+      - ./apriltag.yaml:/apriltag.yaml
+    command: >
+      ros2 run apriltag_ros apriltag_node 
+        --ros-args 
+        -r image_rect:=/camera/color/image_raw 
+        -r camera_info:=/camera/color/camera_info 
+        --params-file /apriltag.yaml
+
+  astra:
+    image: husarion/astra:humble-1.0.2-20231121
+    network_mode: host
+    ipc: host
+    devices:
+      - /dev/bus/usb/
+    volumes:
+      - ./astra_params.yaml:/ros2_ws/install/astra_camera/share/astra_camera/params/astra_mini_params.yaml
+    command: ros2 launch astra_camera astra_mini.launch.py
+
+
+
+
